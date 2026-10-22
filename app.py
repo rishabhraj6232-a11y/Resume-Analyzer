@@ -13,13 +13,14 @@ def home():
 
         return f"You uploaded {resume.filename}"
 
-        
-        
+    return render_template("home.html")
 
+@app.route("/analyze")
+def analyze():
+    return render_template("analyze.html")
 
-    return render_template("product.html")
-
-
-
+@app.route("/about")
+def about():
+    return render_template("home.html")
 
 app.run(debug=True)
