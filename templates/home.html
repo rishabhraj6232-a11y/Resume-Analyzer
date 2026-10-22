@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,11 @@
 
     <title>Resume Analyzer</title>
 
+    <!-- these are the fonts used on the website -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 
     <style>
+        /* this controls the main page style */
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
@@ -16,6 +19,7 @@
             color: #0F172A;
         }
 
+        /* this is the top bar with the logo and links */
         header {
             position: sticky;
             top: 0;
@@ -26,18 +30,21 @@
             align-items: center;
         }
 
+        /* this styles the website name */
         header h2 {
             font-family: 'Space Grotesk', sans-serif;
             color: #2563EB;
             margin: 0;
         }
 
+        /* these are the home and about links */
         nav a {
             text-decoration: none;
             color: #475569;
             margin-left: 20px;
         }
 
+        /* this styles the GitHub link */
         .github-link {
             display: block;
             margin-top: 8px;
@@ -50,11 +57,13 @@
             text-decoration: underline;
         }
 
+        /* this is the main welcome section */
         .hero {
             text-align: center;
             padding: 100px 20px 80px;
         }
 
+        /* this is the small label above the heading */
         .label {
             color: #2563EB;
             background-color: #DBEAFE;
@@ -65,16 +74,19 @@
             font-weight: bold;
         }
 
+        /* this styles the main heading */
         h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 52px;
             margin-bottom: 15px;
         }
 
+        /* this makes the second heading line blue */
         h1 span {
             color: #2563EB;
         }
 
+        /* this styles the text under the heading */
         .description {
             color: #64748B;
             font-size: 16px;
@@ -83,6 +95,7 @@
             margin: 0 auto 30px;
         }
 
+        /* this is the main blue button style */
         .button {
             display: inline-block;
             background-color: #2563EB;
@@ -97,12 +110,26 @@
             background-color: #1D4ED8;
         }
 
+        /* this styles the resume button with a white background and blue outline */
+        .resume-button {
+            background-color: white;
+            color: #2563EB;
+            border: 2px solid #2563EB;
+            margin-left: 10px;
+        }
+
+        .resume-button:hover {
+            background-color: #DBEAFE;
+        }
+
+        /* this is the small text under the buttons */
         .note {
             color: #64748B;
             font-size: 13px;
             margin-top: 20px;
         }
 
+        /* this is the how it works section */
         .how {
             background-color: white;
             text-align: center;
@@ -114,17 +141,20 @@
             font-size: 32px;
         }
 
+        /* this styles the text under the section heading */
         .subtitle {
             color: #64748B;
             margin-bottom: 40px;
         }
 
+        /* this holds the three cards in a row */
         .steps {
             display: flex;
             justify-content: center;
             gap: 25px;
         }
 
+        /* this styles each card */
         .step {
             background-color: #F8FAFC;
             padding: 30px 20px;
@@ -133,6 +163,7 @@
             max-width: 250px;
         }
 
+        /* this styles the number boxes inside the cards */
         .number {
             background-color: #DBEAFE;
             color: #2563EB;
@@ -146,16 +177,19 @@
             font-weight: bold;
         }
 
+        /* this styles the card headings */
         .step h3 {
             font-family: 'Space Grotesk', sans-serif;
         }
 
+        /* this styles the text inside the cards */
         .step p {
             color: #64748B;
             font-size: 14px;
             line-height: 1.7;
         }
 
+        /* this is the dark bar at the bottom of the page */
         footer {
             background-color: #0F172A;
             color: #CBD5E1;
@@ -164,6 +198,7 @@
             font-size: 13px;
         }
 
+        /* this adjusts the layout for smaller screens */
         @media (max-width: 650px) {
             header {
                 padding: 20px;
@@ -192,10 +227,12 @@
 
 <body>
 
+    <!-- this is the header with the website name and navigation -->
     <header>
         <div>
             <h2>ResumeAnalyzer</h2>
 
+            <!-- this link opens the GitHub repository -->
             <a class="github-link"
                href="https://github.com/rishabhraj6232-a11y/Resume-Analyzer"
                target="_blank"
@@ -204,12 +241,14 @@
             </a>
         </div>
 
+        <!-- these links move to sections on this page -->
         <nav>
             <a href="#home">Home</a>
             <a href="#about">About</a>
         </nav>
     </header>
 
+    <!-- this is the main welcome section -->
     <section class="hero" id="home">
 
         <p class="label">YOUR CAREER STARTS HERE</p>
@@ -225,8 +264,14 @@
             opportunities to improve your resume.
         </p>
 
+        <!-- this button moves down to the how it works section -->
         <a href="#about" class="button">
             Discover How It Works
+        </a>
+
+        <!-- this button opens the separate product page -->
+        <a href="./product.html" class="button resume-button">
+            Analyze My Resume →
         </a>
 
         <p class="note">
@@ -235,6 +280,7 @@
 
     </section>
 
+    <!-- this section explains how the website works -->
     <section class="how" id="about">
 
         <h2>How It Works</h2>
@@ -243,8 +289,10 @@
             Three simple steps. A stronger resume.
         </p>
 
+        <!-- these are the three information cards -->
         <div class="steps">
 
+            <!-- this card explains the first step -->
             <div class="step">
                 <div class="number">01</div>
                 <h3>Understand</h3>
@@ -254,6 +302,7 @@
                 </p>
             </div>
 
+            <!-- this card explains the second step -->
             <div class="step">
                 <div class="number">02</div>
                 <h3>Analyze</h3>
@@ -263,6 +312,7 @@
                 </p>
             </div>
 
+            <!-- this card explains the third step -->
             <div class="step">
                 <div class="number">03</div>
                 <h3>Improve</h3>
@@ -276,6 +326,7 @@
 
     </section>
 
+    <!-- this is the footer at the bottom of the page -->
     <footer>
         ResumeAnalyzer | Build a better first impression.
     </footer>
