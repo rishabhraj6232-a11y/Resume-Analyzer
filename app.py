@@ -1,9 +1,25 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
-    return render_template("home.html")
+
+    if request.method == "POST":
+
+        resume = request.files["resume"]
+
+        resume.save("uploads/" +  resume.filename)
+
+        return f"You uploaded {resume.filename}"
+
+        
+        
+
+
+    return render_template("product.html")
+
+
+
 
 app.run(debug=True)
