@@ -1,127 +1,394 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title><!--bro i didn't change the title cuz idk if u wanna change or not-->
+
+    <title>Analyze Your Resume | ResumeAnalyzer</title>
+
+    <!-- these are the fonts used on the website -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 
     <style>
+        /* this controls the main page style */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: #F8FAFC;
             color: #0F172A;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* this is the top bar with the logo and navigation */
         header {
-            position: sticky;
-            top: 0;
-            z-index: 1;
             background-color: white;
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #E2E8F0;
         }
 
-        header > div {
-            display: block;
-        }
-
+        /* this styles the website name */
         header h2 {
             font-family: 'Space Grotesk', sans-serif;
             color: #2563EB;
             margin: 0;
         }
 
+        /* these are the navigation links */
         nav a {
             text-decoration: none;
             color: #475569;
             margin-left: 20px;
+            font-size: 14px;
         }
 
-        .github-link {
-            display: block;
-            margin-top: 8px;
+        nav a:hover {
             color: #2563EB;
-            font-size: 13px;
-            text-decoration: none;
         }
 
-        .github-link:hover {
-            text-decoration: underline;
-        }
-
-        .container {
+        /* this is the main upload area */
+        main {
+            flex: 1;
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            min-height: 100vh;
-            padding-left: 24px;
-        }
-
-        .upload {
-            background-color: #3b3b3b;
-            width: 400px;
-            height: 400px;
-            border-radius: 20%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            gap: 50px;
+            align-items: center;
+            padding: 60px 20px;
         }
 
-        
-        .button {
+        /* this is the upload card */
+        .upload-card {
+            width: 100%;
+            max-width: 650px;
+            background-color: white;
+            padding: 45px;
+            border: 1px solid #E2E8F0;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+            text-align: center;
+        }
+
+        /* this is the small label above the heading */
+        .label {
             display: inline-block;
+            background-color: #DBEAFE;
+            color: #2563EB;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* this styles the main heading */
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 38px;
+            margin: 22px 0 12px;
+        }
+
+        h1 span {
+            color: #2563EB;
+        }
+
+        /* this is the description below the heading */
+        .description {
+            color: #64748B;
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 460px;
+            margin: 0 auto 30px;
+        }
+
+        /* this is the area where users choose their resume */
+        .drop-area {
+            display: block;
+            padding: 35px 20px;
+            border: 2px dashed #93C5FD;
+            border-radius: 14px;
+            background-color: #F8FAFF;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .drop-area:hover,
+        .drop-area.drag-over {
+            background-color: #EFF6FF;
+            border-color: #2563EB;
+        }
+
+        /* this is the upload icon */
+        .upload-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            background-color: #DBEAFE;
+            color: #2563EB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+
+        .drop-area h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0 0 10px;
+            font-size: 19px;
+        }
+
+        .drop-area p {
+            color: #64748B;
+            font-size: 13px;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* this hides the default file picker but keeps it usable */
+        .file-input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        /* this shows the selected file name */
+        .file-name {
+            margin-top: 16px;
+            color: #2563EB;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        /* this is the main analyze button */
+        .analyze-button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 16px 24px;
             background-color: #2563EB;
             color: white;
-            text-decoration: none;
-            padding: 15px 28px;
-            border-radius: 8px;
+            border: none;
+            border-radius: 9px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
             font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .button:hover {
+        .analyze-button:hover {
             background-color: #1D4ED8;
         }
 
+        .analyze-button:disabled {
+            background-color: #94A3B8;
+            cursor: not-allowed;
+        }
 
-        
+        /* this is the message shown after choosing a file */
+        .message {
+            margin-top: 16px;
+            color: #64748B;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* this is the bottom bar */
+        footer {
+            background-color: #0F172A;
+            color: #CBD5E1;
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+        }
+
+        /* this adjusts the layout for smaller screens */
+        @media (max-width: 650px) {
+            header {
+                padding: 20px;
+            }
+
+            main {
+                padding: 35px 16px;
+            }
+
+            .upload-card {
+                padding: 28px 20px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
+    <!-- this is the header with the logo and navigation -->
     <header>
-        <div>
-            <h2>ResumeAnalyzer</h2>
+        <h2>ResumeAnalyzer</h2>
 
-            <!-- this link opens the GitHub repository -->
-            <a class="github-link"
-               href="https://github.com/rishabhraj6232-a11y/Resume-Analyzer"
-               target="_blank"
-               rel="noopener noreferrer">
-                bro window here is Link to our GitHub page
-            </a>
-        </div>
-
-        <!-- these links move to sections on this page -->
+        <!-- these links return to your home page -->
         <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            
+            <a href="./home.html#home">Home</a>
+            <a href="./home.html#about">About</a>
         </nav>
     </header>
 
-   <div class="container">
-        <form method="POST" enctype="multipart/form-data" class="upload">
+    <!-- this is the main resume upload section -->
+    <main>
+        <section class="upload-card">
 
-            <input type="file" name="resume">
+            <p class="label">RESUME ANALYSIS</p>
 
-            <button>Upload Resume</button>
+            <h1>
+                Make your resume<br>
+                <span>stand out.</span>
+            </h1>
 
-        </form>
-    </div> 
+            <p class="description">
+                Upload your resume to get started.
+                Choose your file below and prepare
+                to take the next step in your career.
+            </p>
+
+            <!-- this form lets users choose a resume file -->
+            <form id="resume-form">
+
+                <!-- users can click here or drag a file into this area -->
+                <label class="drop-area" id="drop-area" for="resume">
+                    <div class="upload-icon">↑</div>
+
+                    <h3>Drop your resume here</h3>
+
+                    <p>
+                        or click to browse your files<br>
+                        PDF, DOC, or DOCX
+                    </p>
+                </label>
+
+                <!-- this is the file picker connected to the upload area -->
+                <input
+                    class="file-input"
+                    type="file"
+                    id="resume"
+                    name="resume"
+                    accept=".pdf,.doc,.docx"
+                    required
+                >
+
+                <!-- this displays the selected file name -->
+                <p class="file-name" id="file-name">
+                    No file selected
+                </p>
+
+                <!-- this button checks the selected resume -->
+                <button class="analyze-button" id="analyze-button" type="submit">
+                    Analyze My Resume →
+                </button>
+
+                <!-- this displays feedback to the user -->
+                <p class="message" id="message" aria-live="polite">
+                    Your resume is ready when you are.
+                </p>
+
+            </form>
+
+        </section>
+    </main>
+
+    <!-- this is the footer at the bottom of the page -->
+    <footer>
+        ResumeAnalyzer | Build a better first impression.
+    </footer>
+
+    <script>
+        // these are the elements used on the upload page
+        const form = document.getElementById('resume-form');
+        const fileInput = document.getElementById('resume');
+        const dropArea = document.getElementById('drop-area');
+        const fileName = document.getElementById('file-name');
+        const message = document.getElementById('message');
+
+        // this checks the file and displays its name
+        function showFile(file) {
+            if (!file) {
+                fileName.textContent = 'No file selected';
+                return;
+            }
+
+            const allowedExtensions = ['pdf', 'doc', 'docx'];
+            const extension = file.name.split('.').pop().toLowerCase();
+
+            if (!allowedExtensions.includes(extension)) {
+                fileInput.value = '';
+                fileName.textContent = 'No file selected';
+                message.textContent = 'Please choose a PDF, DOC, or DOCX file.';
+                return;
+            }
+
+            fileName.textContent = 'Selected file: ' + file.name;
+            message.textContent =
+                'Your file is selected. Actual resume analysis is not connected yet.';
+        }
+
+        // this updates the page when a user chooses a file
+        fileInput.addEventListener('change', function () {
+            showFile(fileInput.files[0]);
+        });
+
+        // this lets users drag a file over the upload area
+        dropArea.addEventListener('dragover', function (event) {
+            event.preventDefault();
+            dropArea.classList.add('drag-over');
+        });
+
+        // this removes the highlight when the file leaves the area
+        dropArea.addEventListener('dragleave', function () {
+            dropArea.classList.remove('drag-over');
+        });
+
+        // this accepts a file dropped into the upload area
+        dropArea.addEventListener('drop', function (event) {
+            event.preventDefault();
+            dropArea.classList.remove('drag-over');
+
+            const file = event.dataTransfer.files[0];
+
+            if (file) {
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                fileInput.files = transfer.files;
+                showFile(file);
+            }
+        });
+
+        // this checks that a resume was selected when the button is clicked
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            if (!fileInput.files.length) {
+                message.textContent = 'Please choose your resume first.';
+                return;
+            }
+
+            message.textContent =
+                'Your resume is selected, but actual analysis needs a backend.';
+        });
+    </script>
+
 </body>
 </html>
